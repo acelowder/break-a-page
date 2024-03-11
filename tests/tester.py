@@ -13,27 +13,34 @@ class Tester(object):
         self.driver = driver
         self.tag = tag
 
-        self.WAIT_TIME = 10
+        self.WAIT_TIME = 5
         self.test_elements = []
+        self.current_element_id = ""
         self.passed = 0
         self.failed = 0
 
         self.find_elements()
 
     def find_elements(self):
-        WebDriverWait(self.driver, self.WAIT_TIME).until(
-            EC.presence_of_all_elements_located((By.CSS_SELECTOR, self.tag)))
+        try:
+            WebDriverWait(self.driver, self.WAIT_TIME).until(
+                EC.presence_of_all_elements_located((By.CSS_SELECTOR, self.tag)))
 
-        self.test_elements = self.driver.find_elements(By.CSS_SELECTOR, self.tag)
+            self.test_elements = self.driver.find_elements(By.CSS_SELECTOR, self.tag)
+            print(f"Found {len(self.test_elements)} {self.tag} elements...")
+        except:
+            print(f"Could not find any {self.tag} elements...")
 
     def test(self, element):
         raise NotImplementedError("Subclasses must implement the test method")
 
     def run(self):
-        print(f"Testing {self.tag} elements...")
+        if len(self.test_elements) >= 1:
+            print(f"Testing {self.tag} elements...")
 
         for element in self.test_elements:
-            print(f"\tTesting '{element.get_attribute('id') or element.get_attribute('name') or 'noname'}': ", end="")
+            self.current_element_id = element.get_attribute('id') or element.get_attribute('name') or 'noname'
+            print(f"\tTesting '{self.current_element_id}': ", end="")
 
             try:
                 if not element.is_enabled():
@@ -54,4 +61,5 @@ class Tester(object):
                 error_message = str(e).split('\n', 1)[0] if '\n' in str(e) else str(e)
                 print(f"\t\t{error_name}: {error_message}")
 
-        print(f"[Results: {self.passed}/{self.passed + self.failed} Passed]\n")
+        total_tested = self.passed + self.failed
+        print(f"[{self.tag.capitalize()} Results: {self.passed}/{total_tested} Passed]\n")

@@ -2,7 +2,6 @@ abc123
 ABCDEFG
 abcdefg
 1234567890
-!@#$%^&*()-=_+
    leading space
 multiple     spaces
 line1\nline2
@@ -27,7 +26,6 @@ MiXeDcAsE
 1a2b3c
 a!b@c
 1a@b2#c
-!@#$%^&*()_-+=
 &lt;div&gt;Hello&lt;/div&gt;
 \x00\x01\x02
 C:\Users\John\Documents
@@ -36,3 +34,4 @@ C:\Users\John\Documents
 sub.example.com
 café.example
 aGVsbG8gd29ybGQ=
+!@#$%^&*()_-+=
