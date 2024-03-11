@@ -12,5 +12,8 @@ class InputTester(Tester):
         with open(self.test_data_file, "r") as file:
             self.test_data = [line.rstrip('\n') for line in file.readlines()]
 
-    def test(self):
-        pass
+    def test(self, element):
+        for data in self.test_data:
+            element.clear()
+            element.send_keys(data)
+            assert element.get_attribute("value") == data

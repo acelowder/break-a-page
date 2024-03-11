@@ -1,0 +1,38 @@
+abc123
+ABCDEFG
+abcdefg
+1234567890
+!@#$%^&*()-=_+
+   leading space
+multiple     spaces
+line1\nline2
+tab1\ttab2
+https://www.example.com
+user@example.com
++123-456-7890
+2022-01-01
+12:34 PM
+alpha beta 123
+alpha$beta*123
+café résumé
+∑ ∫ π
+<p>Hello</p>
+alert('Hello, World!')
+<script>alert('XSS')</script>
+Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+[test]
+  leading space
+multiple   spaces
+MiXeDcAsE
+1a2b3c
+a!b@c
+1a@b2#c
+!@#$%^&*()_-+=
+&lt;div&gt;Hello&lt;/div&gt;
+\x00\x01\x02
+C:\Users\John\Documents
+192.168.1.1
+2001:0db8:85a3:0000:0000:8a2e:0370:7334
+sub.example.com
+café.example
+aGVsbG8gd29ybGQ=
