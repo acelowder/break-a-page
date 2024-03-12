@@ -15,9 +15,11 @@ class InputTester(Tester):
             self.test_data_length = len(self.test_data)
 
     def test(self, element):
-        for line_number, data in enumerate(self.test_data):
+        for line_number, data in enumerate(self.test_data, start=1):
             print("\r", end="")
-            print(f"\tTesting '{self.current_element_id}': {line_number}/{self.test_data_length} Inputting '{data}' :", end="")
+            print(f"\tTesting [{self.current_element_num}/{len(self.test_elements)}]: ", end = "")
+            print(f"{self.current_element_id}: ", end="")
+            print(f"[{line_number}/{self.test_data_length}] Inputting '{data}': ", end="")
 
             element.clear()
             element.send_keys(data)

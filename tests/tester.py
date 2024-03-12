@@ -18,6 +18,9 @@ class Tester(object):
 
         self.WAIT_TIME = 5
         self.test_elements = []
+        self.num_elements = 0
+        self.current_element_num = 0
+
         self.current_element_id = ""
         self.passed = 0
         self.failed = 0
@@ -30,6 +33,8 @@ class Tester(object):
                 EC.presence_of_all_elements_located((By.CSS_SELECTOR, self.tag)))
 
             self.test_elements = self.driver.find_elements(By.CSS_SELECTOR, self.tag)
+            self.num_elements = len(self.test_elements)
+
             print(f"Found {len(self.test_elements)} <{self.tag}> elements...")
         except:
             print(f"Could not find any <{self.tag}> elements...")
@@ -41,9 +46,9 @@ class Tester(object):
         if len(self.test_elements) >= 1:
             print(f"Testing {self.tag} elements...")
 
-        for element_num, element in enumerate(self.test_elements):
+        for self.current_element_num, element in enumerate(self.test_elements, start=1):
             try:
-                print(f"\tTesting [{element_num + 1}/{len(self.test_elements)}]: ", end="")
+                print(f"\tTesting [{self.current_element_num}/{self.num_elements}]: ", end="")
                 self.current_element_id = f"id='{element.get_attribute('id')}'" or f"name='element.get_attribute('name')'" or "unidentifiable"
                 print(f"{self.current_element_id}: ", end="")
 
