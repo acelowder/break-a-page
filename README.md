@@ -1,7 +1,10 @@
 # Break-a-Page
 
 Break-a-Page is a Python-based stress testing tool built on top of Selenium WebDriver. It allows users to stress test web applications by simulating user interactions such as clicking buttons, filling forms, and navigating through links.
-![Demo](https://media.giphy.com/media/Qx2suERgvb598BBtEv/giphy.gif)
+
+<p align="center">
+  <img src="https://media.giphy.com/media/Qx2suERgvb598BBtEv/giphy.gif">
+</p>
 
 ## Table of Contents
 - [Features](#features)
