@@ -6,6 +6,14 @@ from tests.link_tester import LinkTester
 import time
 
 def initialize_driver():
+    """Initialize a Chrome WebDriver.
+
+    Prompts the user for a URL and whether to run in headless mode.
+    If no URL is provided, defaults to 'http://www.techstepacademy.com/training-ground'.
+
+    Returns:
+        WebDriver: The initialized WebDriver instance.
+    """
     print("== Break-a-Page ==")
     user_url = input("Enter a URL to stress test (press Enter for default): ") or "http://www.techstepacademy.com/training-ground"
     headless_mode = input("Run headless test? (y/n): ").lower() == 'y'
@@ -22,6 +30,14 @@ def initialize_driver():
     return driver
 
 def stress_testing(driver):
+    """Run stress tests on various elements of the webpage.
+
+    Args:
+        driver (WebDriver): The WebDriver instance.
+
+    Returns:
+        list: A list of testers used for stress testing.
+    """
     print("== Stress Testing ==")
 
     testers = [InputTester(driver), ButtonTester(driver), LinkTester(driver)]
@@ -33,6 +49,12 @@ def stress_testing(driver):
     return testers
 
 def display_test_results(testers, test_start_time):
+    """Display the results of the stress tests.
+
+    Args:
+        testers (list): A list of testers used for stress testing.
+        test_start_time (float): The start time of the stress testing process.
+    """
     print("== Test Results ==")
 
     test_duration = time.time() - test_start_time
