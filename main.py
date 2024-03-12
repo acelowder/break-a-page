@@ -2,6 +2,7 @@ from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from tests.input_tester import InputTester
 from tests.button_tester import ButtonTester
+from tests.link_tester import LinkTester
 import time
 
 def initialize_driver():
@@ -11,6 +12,7 @@ def initialize_driver():
     options = Options()
     options.add_argument('--headless')
     driver = webdriver.Chrome(options=options)
+    # driver = webdriver.Chrome()
 
     print("Navigating to URL...")
     # driver.get("http://www.techstepacademy.com/training-ground")
@@ -25,8 +27,9 @@ def stress_testing(driver):
     print("== Stress Testing ==\n")
 
     testers = [
-        InputTester(driver),
-        ButtonTester(driver)
+        #InputTester(driver),
+        #ButtonTester(driver),
+        LinkTester(driver)
     ]
 
     print()
