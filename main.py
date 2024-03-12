@@ -24,7 +24,7 @@ def initialize_driver():
     return driver
 
 def stress_testing(driver):
-    print("== Stress Testing ==\n")
+    print("== Stress Testing ==")
 
     testers = [
         #InputTester(driver),
@@ -43,7 +43,9 @@ def display_test_results(testers, test_start_time):
     print("== Test Results ==")
 
     test_duration = time.time() - test_start_time
-    print(f"Stress Test Duration: {test_duration:.2f}")
+    minutes = int(test_duration // 60)
+    seconds = int(test_duration % 60)
+    print(f"Stress Test Duration: {minutes}m {seconds}s")
 
     total_passed = 0
     total_failed = 0

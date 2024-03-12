@@ -30,7 +30,7 @@ class Tester(object):
                 EC.presence_of_all_elements_located((By.CSS_SELECTOR, self.tag)))
 
             self.test_elements = self.driver.find_elements(By.CSS_SELECTOR, self.tag)
-            print(f"Found {len(self.test_elements)} {self.tag} elements...")
+            print(f"Found {len(self.test_elements)} <{self.tag}> elements...")
         except:
             print(f"Could not find any <{self.tag}> elements...")
 
@@ -39,26 +39,19 @@ class Tester(object):
 
     def run(self):
         if len(self.test_elements) >= 1:
-            print(f"Testing <{self.tag}> elements...")
+            print(f"Testing {self.tag} elements...")
 
         for element_num, element in enumerate(self.test_elements):
             try:
-                if not element.is_present():
-                    print(f"\tTesting 'element {element_num}': ", end="")
-                    raise MissingElement("Element is no longer present")
-
-                self.current_element_id = element.get_attribute('id') or element.get_attribute(
-                    'name') or f"element {element_num}"
-                print(f"\tTesting '{self.current_element_id}': ", end="")
+                print(f"\tTesting [{element_num}/{len(self.test_elements)}]: ", end="")
+                self.current_element_id = f"id='{element.get_attribute('id')}'" or f"name='element.get_attribute('name')'" or "unidentifiable"
+                print(f"{self.current_element_id}: ", end="")
 
                 if not element.is_displayed():
                     raise HiddenError("Element is disabled")
 
                 if not element.is_enabled():
                     raise DisabledError("Element is disabled")
-
-                if not element.is_displayed():
-                    raise HiddenError("Element is disabled")
 
                 self.test(element)
 
