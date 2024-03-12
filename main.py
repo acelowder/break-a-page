@@ -8,15 +8,20 @@ import time
 def initialize_driver():
     print("== Break-a-Page ==")
 
+    user_url = input("Enter a URL to stress test: ")
+    if user_url == '':
+        user_url = "http://www.techstepacademy.com/training-ground"
+    headless_mode = input("Run headless test? (y/n): ").lower() == 'y'
+    print()
+
     print("Initializing chrome driver...")
     options = Options()
-    options.add_argument('--headless')
+    if headless_mode:
+        options.add_argument('--headless')
     driver = webdriver.Chrome(options=options)
-    # driver = webdriver.Chrome()
 
-    print("Navigating to URL...")
-    # driver.get("http://www.techstepacademy.com/training-ground")
-    driver.get("http://www.youtube.com")
+    print(f"Navigating to {user_url}...")
+    driver.get(user_url)
 
     print("Ready for testing...")
     print()
@@ -27,8 +32,8 @@ def stress_testing(driver):
     print("== Stress Testing ==")
 
     testers = [
-        #InputTester(driver),
-        #ButtonTester(driver),
+        InputTester(driver),
+        ButtonTester(driver),
         LinkTester(driver)
     ]
 
