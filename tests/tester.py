@@ -43,7 +43,7 @@ class Tester(object):
 
         for element_num, element in enumerate(self.test_elements):
             try:
-                print(f"\tTesting [{element_num}/{len(self.test_elements)}]: ", end="")
+                print(f"\tTesting [{element_num + 1}/{len(self.test_elements)}]: ", end="")
                 self.current_element_id = f"id='{element.get_attribute('id')}'" or f"name='element.get_attribute('name')'" or "unidentifiable"
                 print(f"{self.current_element_id}: ", end="")
 
