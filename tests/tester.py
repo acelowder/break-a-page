@@ -1,6 +1,7 @@
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.common.exceptions import UnexpectedAlertPresentException, NoAlertPresentException
 
 class MissingElement(Exception):
     pass
@@ -62,7 +63,16 @@ class Tester(object):
 
                 print("Pass")
                 self.passed += 1
+
             except Exception as e:
+                if isinstance(e, UnexpectedAlertPresentException):
+                    try:
+                        alert = self.driver.switch_to.alert
+                        alert.dismiss()
+                        print("Alert")
+                    except NoAlertPresentException:
+                        pass
+
                 print("Fail")
                 self.failed += 1
 

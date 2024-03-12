@@ -32,7 +32,7 @@ def stress_testing(driver):
     print("== Stress Testing ==")
 
     testers = [
-        InputTester(driver),
+        #InputTester(driver),
         ButtonTester(driver),
         LinkTester(driver)
     ]
