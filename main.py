@@ -7,36 +7,24 @@ import time
 
 def initialize_driver():
     print("== Break-a-Page ==")
-
-    user_url = input("Enter a URL to stress test: ")
-    if user_url == '':
-        user_url = "http://www.techstepacademy.com/training-ground"
+    user_url = input("Enter a URL to stress test (press Enter for default): ") or "http://www.techstepacademy.com/training-ground"
     headless_mode = input("Run headless test? (y/n): ").lower() == 'y'
-    print()
 
-    print("Initializing chrome driver...")
+    print("\nInitializing chrome driver...")
     options = Options()
-    if headless_mode:
-        options.add_argument('--headless')
+    options.add_argument('--headless') if headless_mode else None
     driver = webdriver.Chrome(options=options)
 
     print(f"Navigating to {user_url}...")
     driver.get(user_url)
 
-    print("Ready for testing...")
-    print()
-
+    print("Ready for testing...\n")
     return driver
 
 def stress_testing(driver):
     print("== Stress Testing ==")
 
-    testers = [
-        #InputTester(driver),
-        ButtonTester(driver),
-        LinkTester(driver)
-    ]
-
+    testers = [InputTester(driver), ButtonTester(driver), LinkTester(driver)]
     print()
 
     for tester in testers:
@@ -52,30 +40,22 @@ def display_test_results(testers, test_start_time):
     seconds = int(test_duration % 60)
     print(f"Stress Test Duration: {minutes}m {seconds}s")
 
-    total_passed = 0
-    total_failed = 0
-    total_tested = 0
+    total_passed, total_failed, total_tested = 0, 0, 0
     for tester in testers:
         total_passed += tester.passed
         total_failed += tester.failed
+
         tested = tester.passed + tester.failed
         print(f"{tester.tag.capitalize()} Test: {tester.passed}/{tested} Passed")
 
     total_tested = total_passed + total_failed
-    print(f"[{total_passed}/{total_tested} Passed, {total_failed} Failed]")
+    print(f"[{total_tested} Tested, {total_passed} Passed, {total_failed} Failed]")
 
 def main():
-    # Creating driver and navigating to url
     driver = initialize_driver()
-
-    # Creating testers and running them
     test_start_time = time.time()
     testers = stress_testing(driver)
-
-    # Display total results
     display_test_results(testers, test_start_time)
-
-    # Closing the driver
     driver.quit()
 
 if __name__ == "__main__":
